@@ -1,0 +1,2515 @@
+openapi: 3.0.2
+
+servers:
+  - description: Local Dev
+    url: http://localhost:5000
+  - description: Mock Service
+    url: https://mock-agrio.azurewebsites.net/onboarding
+  - description: Dev Api
+    url: https://api.dev.agriofinans.com/onboarding
+  - description: Staging Api
+    url: https://api.staging.agriofinans.com/onboarding
+  - description: Prod Api
+    url: https://api.agriofinans.com/onboarding
+
+info:
+  title: Agrio Onboarding Api
+  description: Agrio Onboarding Services Documentation
+  contact:
+    email: admin@sophietech.com
+  version: "v1"
+
+externalDocs:
+  description: Documentation
+  url: https://doc-agrio.azurewebsites.net/onboarding
+
+tags:
+  - name: Applications
+    description: Application operations
+  - name: Pre Customers
+    description: Pre Customer operations
+  - name: Documents
+    description: Document operations
+  - name: Customers
+    description: Application operations
+  - name: Health Check
+    description: Health check operations
+
+paths:
+  /applications/waiting:
+    get:
+      tags:
+        - Applications
+      summary: Get waiting Applications
+      description: Get waiting Applications
+      operationId: getWaitingApplications
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Term"
+        - $ref: "#/components/parameters/Sort"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationListModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/in-progress:
+    get:
+      tags:
+        - Applications
+      summary: Get inprogress Applications
+      description: Get inprogress Applications
+      operationId: getInprogressApplications
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Term"
+        - $ref: "#/components/parameters/Sort"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationListModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/waiting-for-confirmation:
+    get:
+      tags:
+        - Applications
+      summary: Get inprogress Applications
+      description: Get inprogress Applications
+      operationId: getWaitingForConfirmationApplications
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Term"
+        - $ref: "#/components/parameters/Sort"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationListModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/approved:
+    get:
+      tags:
+        - Applications
+      summary: Get approved Applications
+      description: Get approved Applications
+      operationId: getApprovedApplications
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Term"
+        - $ref: "#/components/parameters/Sort"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationListModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/rejected:
+    get:
+      tags:
+        - Applications
+      summary: Get rejected Applications
+      description: Get rejected Applications
+      operationId: getRejectedApplications
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Term"
+        - $ref: "#/components/parameters/Sort"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationListModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/{id}/set-waiting:
+    patch:
+      tags:
+        - Applications
+      summary: Updates application status to waiting
+      description: Updates application status to waiting
+      operationId: updateApplicationStatusWaiting
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/{id}/set-in-progress:
+    patch:
+      tags:
+        - Applications
+      summary: Updates application status to in-progress
+      description: UUpdates application status to in-progress
+      operationId: updateApplicationStatusInProgress
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/{id}/set-waiting-for-confirmation:
+    patch:
+      tags:
+        - Applications
+      summary: Updates application status to waiting-for-confirmation
+      description: Updates application status to waiting-for-confirmation
+      operationId: updateApplicationStatusWaitingForConfirmation
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/{id}/set-approved:
+    patch:
+      tags:
+        - Applications
+      summary: Updates application status to approved
+      description: Updates application status to approved
+      operationId: updateApplicationStatusApproved
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/{id}/set-rejected:
+    patch:
+      tags:
+        - Applications
+      summary: Updates application status to rejected
+      description: Updates application status to rejected
+      operationId: updateApplicationStatusRejected
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+
+  /applications:
+    post:
+      tags:
+        - Applications
+      summary: Create new Application
+      description: Create new Application
+      operationId: createApplication
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+      requestBody:
+        description: Create Application request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationCreateModel"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationViewModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+            Location:
+              $ref: "#/components/headers/Location"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+    get:
+      tags:
+        - Applications
+      summary: Get all Applications
+      description: Get all Applications
+      operationId: getApplications
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Term"
+        - $ref: "#/components/parameters/Sort"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationListModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/{id}:
+    get:
+      tags:
+        - Applications
+      summary: Get Application
+      description: Get Application
+      operationId: getApplication
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationViewModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+    patch:
+      tags:
+        - Applications
+      summary: Update Application
+      description: Update Application
+      operationId: updateApplication
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      requestBody:
+        description: Update Application request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationUpdateModel"
+        required: true
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+    delete:
+      tags:
+        - Applications
+      summary: Delete Application
+      description: Delete Application
+      operationId: deleteApplication
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+
+  /applications/{id}/documents:
+    post:
+      tags:
+        - Documents
+      summary: Create new Document
+      description: Create new Document
+      operationId: createDocument
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      requestBody:
+        description: Create Document request
+        content:
+          cd tipart/form-data:
+            # application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentCreateModel"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentViewModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+            Location:
+              $ref: "#/components/headers/Location"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+    get:
+      tags:
+        - Documents
+      summary: Get all Documents
+      description: Get all Documents
+      operationId: getDocuments
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Term"
+        - $ref: "#/components/parameters/Sort"
+        - $ref: "#/components/parameters/ApplicationParameter"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentListModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+  /applications/{id}/documents/{did}:
+    get:
+      tags:
+        - Documents
+      summary: Get Document
+      description: Get Document
+      operationId: getDocument
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+        - $ref: "#/components/parameters/DocumentParameter"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentViewModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+    patch:
+      tags:
+        - Documents
+      summary: Update Document
+      description: Update Document
+      operationId: updateDocument
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+        - $ref: "#/components/parameters/DocumentParameter"
+      requestBody:
+        description: Create Document request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentUpdateModel"
+        required: true
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+    delete:
+      tags:
+        - Documents
+      summary: Delete Document
+      description: Delete Document
+      operationId: deleteDocument
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/ApplicationParameter"
+        - $ref: "#/components/parameters/DocumentParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator
+
+  /pre-customer:
+    get:
+      tags:
+        - Pre Customers
+      summary: Get Application
+      description: Get Application
+      operationId: getPreCustomerApplication
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationViewModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator,Pre-Free Farmer,Pre-Attached Farmer,Pre-Contractor Supervisor,Pre-Merchant Manager,Pre-Manufacturer Officer
+    patch:
+      tags:
+        - Pre Customers
+      summary: Update Application
+      description: Update Application
+      operationId: updatePreCustomerApplication
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+      requestBody:
+        description: Update Application request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationUpdateModel"
+        required: true
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator,Pre-Free Farmer,Pre-Attached Farmer,Pre-Contractor Supervisor,Pre-Merchant Manager,Pre-Manufacturer Officer
+  /pre-customer/complete:
+    patch:
+      tags:
+        - Pre Customers
+      summary: Updates pre-customer application status
+      description: Updates pre-customer application status to waiting-for-confirmation
+      operationId: updatePreCustomerApplicationComplete
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator,Pre-Free Farmer,Pre-Attached Farmer,Pre-Contractor Supervisor,Pre-Merchant Manager,Pre-Manufacturer Officer
+  /pre-customer/documents:
+    post:
+      tags:
+        - Pre Customers
+      summary: Create new Document for pre customer
+      description: Create new Document for pre customer
+      operationId: createPreCustomerDocument
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+      requestBody:
+        description: Create Document request
+        content:
+          multipart/form-data:
+            # application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentCreateModel"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentViewModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+            Location:
+              $ref: "#/components/headers/Location"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator,Pre-Free Farmer,Pre-Attached Farmer,Pre-Contractor Supervisor,Pre-Merchant Manager,Pre-Manufacturer Officer
+    get:
+      tags:
+        - Pre Customers
+      summary: Get all Documents for pre customer
+      description: Get all Documents for pre customer
+      operationId: getPreCustomerDocuments
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Term"
+        - $ref: "#/components/parameters/Sort"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentListModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator,Pre-Free Farmer,Pre-Attached Farmer,Pre-Contractor Supervisor,Pre-Merchant Manager,Pre-Manufacturer Officer
+  /pre-customer/documents/{did}:
+    get:
+      tags:
+        - Pre Customers
+      summary: Get Document for pre customer
+      description: Get Document for pre customer
+      operationId: getPreCustomerDocument
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/DocumentParameter"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentViewModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator,Pre-Free Farmer,Pre-Attached Farmer,Pre-Contractor Supervisor,Pre-Merchant Manager,Pre-Manufacturer Officer
+    patch:
+      tags:
+        - Pre Customers
+      summary: Update Document fro pre customer
+      description: Update Document for pre customer
+      operationId: updatePreCustomerDocument
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/DocumentParameter"
+      requestBody:
+        description: Create Document request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentUpdateModel"
+        required: true
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator,Pre-Free Farmer,Pre-Attached Farmer,Pre-Contractor Supervisor,Pre-Merchant Manager,Pre-Manufacturer Officer
+    delete:
+      tags:
+        - Pre Customers
+      summary: Delete Document for pre customer
+      description: Delete Document for pre customer
+      operationId: deletePreCustomerDocument
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+        - $ref: "#/components/parameters/DocumentParameter"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+      security:
+        - bearer: []
+      x-security-roles: superadmin,Administrator,Pre-Free Farmer,Pre-Attached Farmer,Pre-Contractor Supervisor,Pre-Merchant Manager,Pre-Manufacturer Officer
+
+  /customers:
+    post:
+      tags:
+        - Customers
+      summary: Create new Customer Application
+      description: Create new Customer Application
+      operationId: insertCustomerApplication
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+      requestBody:
+        description: Create Customer request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerCreateModel"
+        required: true
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+            Location:
+              $ref: "#/components/headers/Location"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+
+  /ping:
+    get:
+      tags:
+        - Health Check
+      summary: Get all ping
+      description: Get all ping
+      operationId: getPing
+      parameters:
+        - $ref: "#/components/parameters/AcceptLanguageParameter"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PingViewModel"
+          headers:
+            Content-Language:
+              $ref: "#/components/headers/Content-Language"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+components:
+  headers:
+    Location:
+      schema:
+        type: string
+        format: url
+      description: A link to created resource
+      example: 3
+    Content-Language:
+      schema:
+        type: string
+        enum:
+          - tr-TR
+          - en-US
+      description: the language(s) intended for the audience
+      example: tr-TR
+    X-RateLimit-Limit:
+      schema:
+        type: integer
+      description: Request limit per hour.
+    X-RateLimit-Remaining:
+      schema:
+        type: integer
+      description: The number of requests left for the time window.
+    X-RateLimit-Reset:
+      schema:
+        type: string
+        format: date-time
+      description: The UTC date/time at which the current rate limit window resets.
+
+  parameters:
+    DeviceHashHeaderParameter:
+      name: X-Device-Hash
+      in: header
+      required: true
+      schema:
+        type: string
+    AcceptLanguageParameter:
+      name: Accept-Language
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - tr
+          - en
+          - tr-TR
+          - en-US
+      description: language(s) client is able to understand, and which locale variant is preferred
+      example: tr
+    Offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      description: The numbers of items to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    Term:
+      name: term
+      in: query
+      description:
+        Filter argument in which to retrieve the results. Basic text search on
+        relevant fields
+      schema:
+        type: string
+        default: ""
+    Sort:
+      name: sort
+      in: query
+      description:
+        Order in which to retrieve the results. Multiple sort criteria can not
+        be passed
+      schema:
+        type: string
+        default: ""
+    ApplicationParameter:
+      name: id
+      in: path
+      schema:
+        type: string
+        format: uuid
+      required: true
+      description: Contractor Application Id
+    DocumentParameter:
+      name: did
+      in: path
+      schema:
+        type: string
+        format: uuid
+      required: true
+      description: Document Id
+
+  responses:
+    BadRequest:
+      description: The specified resource was not valid
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorViewModel"
+      headers:
+        Content-Language:
+          $ref: "#/components/headers/Content-Language"
+    Forbidden:
+      description: You are not allowed to take specified action
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorViewModel"
+      headers:
+        Content-Language:
+          $ref: "#/components/headers/Content-Language"
+    Conflict:
+      description: The specified resource already persisted
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorViewModel"
+      headers:
+        Content-Language:
+          $ref: "#/components/headers/Content-Language"
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorViewModel"
+      headers:
+        Content-Language:
+          $ref: "#/components/headers/Content-Language"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorViewModel"
+      headers:
+        Content-Language:
+          $ref: "#/components/headers/Content-Language"
+    NoContent:
+      description: No Content
+
+  securitySchemes:
+    bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description:
+        'Authorization header using the Bearer scheme. Ex: "Authorization:
+        Bearer {token}"'
+
+  schemas:
+    ErrorViewModel:
+      type: object
+      properties:
+        code:
+          type: string
+          example: fC9LZX
+        title:
+          type: string
+          example: Invalid request parameters
+        detail:
+          type: string
+          example: The provided resource parameters are not valid.
+        errors:
+          type: array
+          items:
+            type: string
+            example: validation error message
+      required:
+        - code
+        - title
+        - detail
+    PingViewModel:
+      type: object
+      properties:
+        code:
+          type: string
+        result:
+          type: string
+
+    ApplicationCreateModel:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Acme Corp.
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.title
+        agrioUserName:
+          type: string
+          description: Agrio User ID
+          x-tabak-ui:
+            type: INPUT
+            inputType: hidden
+        # Contractor Details
+        sectorId:
+          type: string
+          format: uuid
+          description: This field not used for applications. Only for backoffice
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.sector
+        sectorName:
+          type: string
+          description: This field not used for applications. Only for backoffice
+          example: Agriculture
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.sector
+        countOfFarmers:
+          type: integer
+          minimum: 0
+          example: 22
+          x-tabak-ui:
+            type: INPUT
+            inputType: number
+            placeholder: label.countOfFarmers
+        portfolioSummary:
+          type: string
+          example: some summary.
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.portfolioSummary
+        contractCount:
+          type: integer
+          minimum: 0
+          example: 22
+          x-tabak-ui:
+            type: INPUT
+            inputType: number
+            placeholder: label.contractCount
+        aimedMaterials:
+          type: string
+          example: material list.
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.aimedMaterials
+        # Farmer Details
+        cropDetails:
+          type: string
+          example: Tomato, Patato
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.cropDetails
+        livestock:
+          type: string
+          example: cow, sheep
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.livestock
+        plantArea:
+          type: number
+          format: double
+          minimum: 0
+          example: 22.89
+          x-tabak-ui:
+            type: INPUT
+            inputType: number
+            placeholder: label.plantArea
+        plantAreaCks:
+          type: number
+          format: double
+          minimum: 0
+          example: 22.89
+          x-tabak-ui:
+            type: INPUT
+            inputType: number
+            placeholder: label.plantAreaCks
+        # Merchant and Vendor Details
+        categoryId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000001"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.category
+        categoryName:
+          type: string
+          example: Agriculture
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.category
+        brand:
+          type: string
+          example: Amazing Fertilizer
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.brand
+
+        status:
+          type: integer
+          enum:
+            - waiting
+            - inprogress
+            - waitingForConfirmation
+            - approved
+            - rejected
+          example: waiting
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.applicationStatus
+        customerType:
+          type: integer
+          enum:
+            - contractor
+            - merchant
+            - farmer
+            - vendor
+            - financialInstitution
+          example: farmer
+          x-tabak-validators:
+            - type: required
+              message: err.required
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.customerType
+        companyType:
+          type: integer
+          enum:
+            - private
+            - corporate
+          example: corporate
+          x-tabak-validators:
+            - type: required
+              message: err.required
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.companyType
+        taxOfficeId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000465"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.taxOffice
+        taxOfficeName:
+          type: string
+          example: "Beyoğlu Vergi Dairesi Müdürlüğü"
+          x-tabak-validators:
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.taxOffice
+        taxNo:
+          type: string
+          example: KD454587-454
+          x-tabak-validators:
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.taxNo
+        taxOfficeCityId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000040"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.taxOfficeCity
+        tckn:
+          type: string
+          example: "22222222222"
+          x-tabak-validators:
+            - type: minLength
+              param: 11
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.tckn
+        cityId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000040"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.city
+        cityName:
+          type: string
+          example: İstanbul
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.city
+        townId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000454"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.town
+        townName:
+          type: string
+          example: Bakırköy
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.town
+        districtId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000001133"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.district
+        districtName:
+          type: string
+          example: Kartaltepe
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.district
+        neighborhoodId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000035448"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.neighborhood
+        neighborhoodName:
+          type: string
+          example: Kartaltepe Mah.
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.neighborhood
+        zipCode:
+          type: string
+          example: "34145"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 5
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.zipCode
+        address:
+          type: string
+          example: "15.sk no: 23."
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.address
+        authorizedPersonName:
+          type: string
+          example: John
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.authorizedPersonName
+        authorizedPersonSurname:
+          type: string
+          example: Doe
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.authorizedPersonSurname
+        phoneNumber:
+          type: string
+          example: "+905556667788"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 10
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.phoneNumber
+        email:
+          type: string
+          example: "someone@somecorp.com"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.email
+    ApplicationUpdateModel:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Acme Corp.
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        # Contractor Details
+        sectorId:
+          type: string
+          format: uuid
+          description: This field not used for applications. Only for backoffice
+        sectorName:
+          type: string
+          description: This field not used for applications. Only for backoffice
+          example: Agriculture
+        countOfFarmers:
+          type: integer
+          minimum: 0
+          example: 22
+        portfolioSummary:
+          type: string
+          example: some summary.
+        contractCount:
+          type: integer
+          minimum: 0
+          example: 22
+        aimedMaterials:
+          type: string
+          example: material list.
+        # Farmer Details
+        cropDetails:
+          type: string
+          example: Tomato, Patato
+        livestock:
+          type: string
+          example: cow, sheep
+        plantArea:
+          type: number
+          format: double
+          minimum: 0
+          example: 22.89
+        plantAreaCks:
+          type: number
+          format: double
+          minimum: 0
+          example: 22.89
+        # Merchant and Vendor Details
+        categoryId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000001"
+        categoryName:
+          type: string
+          example: Agriculture
+        brand:
+          type: string
+          example: Amazing Fertilizer
+
+        status:
+          type: integer
+          enum:
+            - waiting
+            - inprogress
+            - waitingForConfirmation
+            - approved
+            - rejected
+          example: waiting
+        customerType:
+          type: integer
+          enum:
+            - contractor
+            - merchant
+            - farmer
+            - vendor
+            - financialInstitution
+          example: farmer
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        companyType:
+          type: integer
+          enum:
+            - private
+            - corporate
+          example: corporate
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        taxOfficeId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000465"
+        taxOfficeName:
+          type: string
+          example: "Beyoğlu Vergi Dairesi Müdürlüğü"
+          x-tabak-validators:
+            - type: minLength
+              param: 2
+              message: err.minLength
+        taxNo:
+          type: string
+          example: KD454587-454
+          x-tabak-validators:
+            - type: minLength
+              param: 2
+              message: err.minLength
+        taxOfficeCityId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000040"
+        tckn:
+          type: string
+          example: "22222222222"
+          x-tabak-validators:
+            - type: minLength
+              param: 11
+              message: err.minLength
+        cityId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000040"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        cityName:
+          type: string
+          example: İstanbul
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        townId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000454"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        townName:
+          type: string
+          example: Bakırköy
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        districtId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000001133"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+        districtName:
+          type: string
+          example: Kartaltepe
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        neighborhoodId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000035448"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        neighborhoodName:
+          type: string
+          example: Kartaltepe Mah.
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        zipCode:
+          type: string
+          example: "34145"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 5
+              message: err.minLength
+        address:
+          type: string
+          example: "15.sk no: 23."
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        authorizedPersonName:
+          type: string
+          example: John
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        authorizedPersonSurname:
+          type: string
+          example: Doe
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        phoneNumber:
+          type: string
+          example: "+905556667788"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 10
+              message: err.minLength
+        email:
+          type: string
+          example: "someone@somecorp.com"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+    ApplicationViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-tabak-ui:
+            type: INPUT
+            inputType: hidden
+        title:
+          type: string
+          example: Acme Corp.
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.title
+        agrioUserName:
+          type: string
+          description: Agrio User ID
+          x-tabak-ui:
+            type: INPUT
+            inputType: hidden
+        # Contractor Details
+        sectorId:
+          type: string
+          format: uuid
+          description: This field not used for applications. Only for backoffice
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.sector
+        sectorName:
+          type: string
+          description: This field not used for applications. Only for backoffice
+          example: Agriculture
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.sector
+        countOfFarmers:
+          type: integer
+          minimum: 0
+          example: 22
+          x-tabak-ui:
+            type: INPUT
+            inputType: number
+            placeholder: label.countOfFarmers
+        portfolioSummary:
+          type: string
+          example: some summary.
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.portfolioSummary
+        contractCount:
+          type: integer
+          minimum: 0
+          example: 22
+          x-tabak-ui:
+            type: INPUT
+            inputType: number
+            placeholder: label.contractCount
+        aimedMaterials:
+          type: string
+          example: material list.
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.aimedMaterials
+        # Farmer Details
+        cropDetails:
+          type: string
+          example: Tomato, Patato
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.cropDetails
+        livestock:
+          type: string
+          example: cow, sheep
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.livestock
+        plantArea:
+          type: number
+          format: double
+          minimum: 0
+          example: 22.89
+          x-tabak-ui:
+            type: INPUT
+            inputType: number
+            placeholder: label.plantArea
+        plantAreaCks:
+          type: number
+          format: double
+          minimum: 0
+          example: 22.89
+          x-tabak-ui:
+            type: INPUT
+            inputType: number
+            placeholder: label.plantAreaCks
+        # Merchant and Vendor Details
+        categoryId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000001"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.category
+        categoryName:
+          type: string
+          example: Agriculture
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.category
+        brand:
+          type: string
+          example: Amazing Fertilizer
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.brand
+
+        status:
+          type: integer
+          enum:
+            - waiting
+            - inprogress
+            - waitingForConfirmation
+            - approved
+            - rejected
+          example: waiting
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.applicationStatus
+        customerType:
+          type: integer
+          enum:
+            - contractor
+            - merchant
+            - farmer
+            - vendor
+            - financialInstitution
+          example: farmer
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.customerType
+        companyType:
+          type: integer
+          enum:
+            - private
+            - corporate
+          example: corporate
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.companyType
+        taxOfficeId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000465"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.taxOffice
+        taxOfficeName:
+          type: string
+          example: "Beyoğlu Vergi Dairesi Müdürlüğü"
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.taxOffice
+        taxNo:
+          type: string
+          example: KD454587-454
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.taxNo
+        taxOfficeCityId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000040"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.taxOfficeCity
+        tckn:
+          type: string
+          example: "22222222222"
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.tckn
+        cityId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000040"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.city
+        cityName:
+          type: string
+          example: İstanbul
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.city
+        townId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000454"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.town
+        townName:
+          type: string
+          example: Bakırköy
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.town
+        districtId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000001133"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.district
+        districtName:
+          type: string
+          example: Kartaltepe
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.district
+        neighborhoodId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000035448"
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.neighborhood
+        neighborhoodName:
+          type: string
+          example: Kartaltepe Mah.
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.neighborhood
+        zipCode:
+          type: string
+          example: "34145"
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.zipCode
+        address:
+          type: string
+          example: "15.sk no: 23."
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.address
+        authorizedPersonName:
+          type: string
+          example: John
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.authorizedPersonName
+        authorizedPersonSurname:
+          type: string
+          example: Doe
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.authorizedPersonSurname
+        phoneNumber:
+          type: string
+          example: "+905556667788"
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.phoneNumber
+        email:
+          type: string
+          example: "someone@somecorp.com"
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.email
+        crmData:
+          type: string
+          example: "something"
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.crmData
+    ApplicationListItemModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-tabak-ui:
+            type: INPUT
+            inputType: hidden
+        title:
+          type: string
+          example: Acme Corp.
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.title
+        status:
+          type: integer
+          enum:
+            - waiting
+            - inprogress
+            - waitingForConfirmation
+            - approved
+            - rejected
+          example: waiting
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.applicationStatus
+        customerType:
+          type: integer
+          enum:
+            - contractor
+            - merchant
+            - farmer
+            - vendor
+            - financialInstitution
+          example: farmer
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.customerType
+        cityName:
+          type: string
+          example: İstanbul
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.city
+        townName:
+          type: string
+          example: Bakırköy
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.town
+        districtName:
+          type: string
+          example: Kartaltepe
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.district
+        neighborhoodName:
+          type: string
+          example: Kartaltepe Mah.
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.neighborhood
+        authorizedPersonName:
+          type: string
+          example: John
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.authorizedPersonName
+        authorizedPersonSurname:
+          type: string
+          example: Doe
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.authorizedPersonSurname
+        phoneNumber:
+          type: string
+          example: "+905556667788"
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.phoneNumber
+        email:
+          type: string
+          example: "someone@somecorp.com"
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.email
+    ApplicationListModel:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total items count
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ApplicationListItemModel"
+
+    DocumentCreateModel:
+      type: object
+      properties:
+        title:
+          type: string
+          example: SomeDocument
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.title
+        documentTypeId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000001"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.documentType
+        documentTypeName:
+          type: string
+          example: Nüfus Cüzdanı
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.documentType
+        expireDate:
+          type: string
+          format: date-time
+          example: "2020-02-20"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+          x-tabak-ui:
+            type: INPUT
+            inputType: date
+            placeholder: label.expireDate
+        documentFile:
+          type: string
+          format: binary
+          x-tabak-validators:
+            - type: required
+              message: err.required
+          x-tabak-ui:
+            type: INPUT
+            inputType: upload
+            placeholder: label.documentFile
+    DocumentUpdateModel:
+      type: object
+      properties:
+        title:
+          type: string
+          example: SomeDocument
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        url:
+          type: string
+          example: https://somedomain.com/documents/document1.pdf
+          x-tabak-validators:
+            - type: required
+              message: err.required
+            - type: minLength
+              param: 2
+              message: err.minLength
+        documentTypeId:
+          type: string
+          format: uuid
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        documentTypeName:
+          type: string
+          example: Nüfus Cüzdanı
+        expireDate:
+          type: string
+          format: date-time
+          example: "2020-02-20"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        fileName:
+          type: string
+        contentType:
+          type: string
+        fileLength:
+          type: integer
+    DocumentViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-tabak-ui:
+            type: INPUT
+            inputType: hidden
+        title:
+          type: string
+          example: SomeDocument
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.title
+        url:
+          type: string
+          example: https://somedomain.com/documents/document1.pdf
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.url
+        documentTypeId:
+          type: string
+          format: uuid
+          x-tabak-ui:
+            type: SELECT
+            placeholder: label.documentType
+        documentTypeName:
+          type: string
+          x-tabak-ui:
+            type: INPUT
+            placeholder: label.documentType
+        expireDate:
+          type: string
+          format: date-time
+          example: "2020-02-20"
+          x-tabak-ui:
+            type: INPUT
+            inputType: date
+            placeholder: label.expireDate
+        fileName:
+          type: string
+          x-tabak-ui:
+            type: INPUT
+            readOnly: true
+            placeholder: label.fileName
+        contentType:
+          type: string
+          x-tabak-ui:
+            type: INPUT
+            readOnly: true
+            placeholder: label.contentType
+        fileLength:
+          type: integer
+          x-tabak-ui:
+            type: INPUT
+            readOnly: true
+            placeholder: label.fileLength
+    DocumentListItemModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-tabak-ui:
+            type: INPUT
+            inputType: hidden
+        title:
+          type: string
+          example: SomeDocument
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.title
+        url:
+          type: string
+          example: https://somedomain.com/documents/document1.pdf
+          x-tabak-ui:
+            type: INPUT
+            inputType: text
+            placeholder: label.url
+        documentTypeName:
+          type: string
+          x-tabak-ui:
+            type: INPUT
+            placeholder: label.documentType
+        expireDate:
+          type: string
+          format: date-time
+          example: "2020-02-20"
+          x-tabak-ui:
+            type: INPUT
+            inputType: date
+            placeholder: label.expireDate
+    DocumentListModel:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          description: Total items count
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/DocumentListItemModel"
+
+    CustomerCreateModel:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Saha Elemanı
+        email:
+          type: string
+          example: "someone@sophietech.com"
+        contacts:
+          type: array
+          items:
+            type: object
+            $ref: "#/components/schemas/ContactModel"
+        company:
+          type: object
+          $ref: "#/components/schemas/CompanyModel"
+        deal:
+          type: object
+          $ref: "#/components/schemas/DealModel"
+    ContactModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: vid field
+          example: "42"
+        name:
+          type: string
+          example: "Murtaza"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        surname:
+          type: string
+          example: "Koparan"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        email:
+          type: string
+          example: "someone@somedomain.com"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        phone:
+          type: string
+          example: "5556667788"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        ownerId:
+          type: string
+          example: "42"
+        leadChannel:
+          type: string
+          example: "some channel"
+        message:
+          type: string
+          example: "some message"
+        companyId:
+          type: string
+          example: "42"
+        mergedVids:
+          type: string
+          example: "42,2,13"
+        # Contractor Details
+        sectorId:
+          type: string
+          format: uuid
+          description: This field not used for applications. Only for backoffice
+        sectorName:
+          type: string
+          description: This field not used for applications. Only for backoffice
+          example: Agriculture
+        countOfFarmers:
+          type: integer
+          minimum: 0
+          example: 22
+        portfolioSummary:
+          type: string
+          example: some summary.
+        contractCount:
+          type: integer
+          minimum: 0
+          example: 2
+        aimedMaterials:
+          type: string
+          example: material list.
+        # Farmer Details
+        cropDetails:
+          type: string
+          example: Tomato
+        livestock:
+          type: string
+          example: Koyun
+        plantArea:
+          type: number
+          format: double
+          minimum: 0
+          example: 21.89
+        plantAreaCks:
+          type: number
+          format: double
+          minimum: 0
+          example: 22.99
+        # Merchant and Vendor Details
+        categoryId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000001"
+        categoryName:
+          type: string
+          example: Agriculture
+        brand:
+          type: string
+          example: Amazing Fertilizer
+    CompanyModel:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "42"
+        name:
+          type: string
+          example: "Acme Corp."
+        type:
+          type: string
+          enum:
+            - private
+            - corporate
+          example: corporate
+          description: "enum -> private, corporate"
+        domain:
+          type: string
+          example: "some domain"
+        email:
+          type: string
+          example: "someone@somedomain.com"
+        phone:
+          type: string
+          example: "+905556667788"
+        city:
+          type: string
+          example: "Çanakkale"
+        region:
+          type: string
+          example: "Türkiye"
+        ownerId:
+          type: string
+          example: "42"
+        description:
+          type: string
+          example: "some description"
+        linkedInPage:
+          type: string
+          example: "https://somelink.com"
+        taxOfficeId:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000465"
+        taxOfficeName:
+          type: string
+          example: "Beyoğlu Vergi Dairesi Müdürlüğü"
+        taxNo:
+          type: string
+          example: KD454587-454
+        tckn:
+          type: string
+          example: "22222222222"
+    DealModel:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "42"
+        name:
+          type: string
+          example: "Free Willy"
+        type:
+          type: string
+          example: "new business"
+        stage:
+          type: string
+          enum:
+            - contractor
+            - merchant
+            - farmer
+            - vendor
+            - financialInstitution
+          example: farmer
+          description: "enum -> contractor, merchant, farmer, vendor, financialInstitution"
+          x-tabak-validators:
+            - type: required
+              message: err.required
+        closeDate:
+          type: string
+          format: date-time
+          example: "2020-02-20"
+        description:
+          type: string
+          example: "some description"
+
+x-tabak:
+  resources:
+    - name: Application
+      schemas:
+        create: ApplicationCreateModel
+        view: ApplicationViewModel
+        update: ApplicationUpdateModel
+        list: ApplicationListModel
+        list-item: ApplicationListItemModel
+      operations:
+        create: createApplication
+        get: getApplication
+        update: updateApplication
+        list: getApplications
+        delete: deleteApplication
+    - name: Document
+      schemas:
+        create: DocumentCreateModel
+        view: DocumentViewModel
+        update: DocumentUpdateModel
+        list: DocumentListModel
+        list-item: DocumentListItemModel
+      operations:
+        create: createDocument
+        get: getDocument
+        update: updateDocument
+        list: getDocuments
+        delete: deleteDocument
+    - name: PreCustomer
+      schemas:
+        create: ApplicationCreateModel
+        view: ApplicationViewModel
+        update: ApplicationUpdateModel
+        list: ApplicationListModel
+        list-item: ApplicationListItemModel
+      operations:
+        create: createApplication
+        get: getPreCustomerApplication
+        update: updatePreCustomerApplication
+        list: getApplications
+        delete: deleteApplication
